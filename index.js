@@ -5,16 +5,19 @@ var create_cloud = require('./cloud.js')
 
 // global game objects
 window.projectiles = []
-// window.bboxes = []
 window.clouds = []
 
 window.w = 1024
 window.h = 768
 
 window.svg = d3.select('body').append('svg')
-  .attr('width', 1024)
+  .attr('width', '100%')
   .attr('height', 768)
+  .attr('viewBox', '0 0 1024 768')
+  .attr('preserveAspectRatio', 'xMidYMid')
   .style('background-color','green')
+
+
 
 window.rng = d3.random.normal(0,0.5)
 
