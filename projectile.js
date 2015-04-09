@@ -9,8 +9,9 @@ module.exports = function create_projectile(_x,_y){
     .attr('cx',x)
     .attr('cy',y)
     .attr('r',3)
-    .attr('fill','blue')
-    .attr('fill-opacity',1)
+    .attr('stroke','white')
+    .attr('fill', 'none')
+    // .attr('fill-opacity',1)
 
   function tick(){
 
@@ -18,9 +19,10 @@ module.exports = function create_projectile(_x,_y){
 
     if(y > h){
       dead = true
+      g.transition().attr('r', 30).attr('fill-opacity',0).remove()
     }
 
-    g.attr('cy',y)
+    g.attr('cy',y).attr('r', 4-Math.random()*2)
 
     window.clouds.forEach(function(element,idx){
 
@@ -47,7 +49,7 @@ module.exports = function create_projectile(_x,_y){
       if(x > e.left && x < (e.left+e.width)){
         if(y > e.top && y < (e.top+e.height)){
           dead = true
-          g.transition().attr('r', 30).attr('fill-opacity',0).remove()
+          g.transition().attr('r', 30).attr('stroke-opacity',0).remove()
           element.explode()
         }
       }

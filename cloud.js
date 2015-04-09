@@ -10,7 +10,7 @@ module.exports = function(){
     .attr('cx', x)
     .attr('cy', y)
     .attr('r', r)
-    .attr('fill', d3.rgb(0,0,0))
+    .attr('fill', d3.rgb(255,255,255))
     .attr('fill-opacity', Math.random()*0.1+0.1)
 
   var node = cloud.node()
@@ -42,9 +42,26 @@ module.exports = function(){
 
   }
 
+  function heal(){
+    r += 4
+    r = Math.min(r, circle_size + (Math.random()*40))
+    _bbox = {
+      height: r*2,
+      width: r*2,
+      left: x-r,
+      top: y-r
+    }
+
+    cloud.transition().attr('fill', 'green').attr('r',r).each('end', function(){
+      cloud.transition().attr('fill','white')
+    })
+
+  }
+
   return {
     bbox: bbox,
-    explode: explode
+    explode: explode,
+    heal: heal
   }
 
 }

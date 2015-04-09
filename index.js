@@ -4,6 +4,7 @@ var create_alien = require('./alien.js')
 var create_cloud = require('./cloud.js')
 var create_service = require('./service.js')
 var create_player = require('./player.js')
+
 // global game objects
 window.projectiles = []
 window.clouds = []
@@ -17,14 +18,15 @@ window.svg = d3.select('body').append('div').append('svg')
   .attr('height', window.h)
   .attr('viewBox', '0 0 1024 768')
   .attr('preserveAspectRatio', 'xMidYMid')
-  .style('background-color', d3.rgb(244,244,244))
+  .style('background-color', d3.rgb(44,44,44))
   .style('width', Math.floor(window.w)+'px')
   .style('height', Math.floor(window.h)+'px')
   .style('display', 'block')
   .style('margin', 'auto')
 
-window.offset_left = document.getElementsByTagName('svg')[0].offsetLeft
+window.service_layer = svg.append('g')
 
+window.offset_left = document.getElementsByTagName('svg')[0].offsetLeft
 
 window.rng = d3.random.normal(0,0.5)
 
@@ -60,7 +62,7 @@ for(var i = 0; i < n_aliens; i++){
 
 // ////////////////////////////////////
 // services
-for(var k = 0; k < 12; k++){
+for(var k = 0; k < 4; k++){
   window.services.push(create_service())
 }
 
@@ -125,13 +127,12 @@ function game_tick(){
     return e.alive();
   })
 
-
-  // console.log('projectiles count ' + projectiles.length)
-
   // tick all the alive projectiles
   window.projectiles.forEach(function(p){
     p.tick()
   })
+
+  player.tick()
 
   window.requestAnimationFrame(game_tick)
 }

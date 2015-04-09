@@ -3,7 +3,7 @@ var icon = require('./icons.js')
 module.exports = function create_player(){
 
   var x = window.w * 0.5
-  var y = window.h * 0.8
+  var y = window.h * 0.75
 
   var sx = 100
   var sy = sx*0.1
@@ -41,5 +41,27 @@ module.exports = function create_player(){
 
   })
 
+  function tick(){
+
+    var range = 4
+    // x += range - (Math.random() * range*2)
+    g_parent.attr('transform', 'translate('+(x-window.offset_left)+' '+y+')')
+
+    // regenerate clouds around
+    var heal_distance = 100
+
+    window.clouds.forEach(function(cloud){
+      if(Math.abs(x-(cloud.bbox().left+(cloud.bbox().width*0.5))) < 50){
+        cloud.heal()
+      }
+
+    })
+
+
+  }
+
+  return {
+    tick: tick
+  }
 
 }
