@@ -6,7 +6,7 @@ module.exports = function(){
   var circle_size = 30
   var _bbox = null
   var x = (0.1*window.w) + (window.w*0.8*Math.random())
-  var y = (h*0.95)
+  var y = (h*0.9)
   var dead = false
 
   var r = (Math.random()*(circle_size*0.5)) + (circle_size*0.5)

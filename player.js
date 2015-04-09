@@ -3,7 +3,7 @@ var icon = require('./icons.js')
 module.exports = function create_player(){
 
   var x = window.w * 0.5
-  var y = window.h * 0.9
+  var y = window.h * 0.8
 
   var sx = 100
   var sy = sx*0.1

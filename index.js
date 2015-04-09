@@ -67,7 +67,7 @@ for(var k = 0; k < 12; k++){
 // ////////////////////////////////////
 // clouds
 for(var j = 0; j < 64; j++){
-  // window.clouds.push(create_cloud())
+  window.clouds.push(create_cloud())
 }
 
 
