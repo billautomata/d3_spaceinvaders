@@ -35,6 +35,25 @@ module.exports = function create_projectile(_x,_y){
       }
 
     })
+
+    window.services.forEach(function(element,idx){
+
+      if(element.bbox() === null){
+        return;
+      }
+
+      var e = element.bbox()
+
+      if(x > e.left && x < (e.left+e.width)){
+        if(y > e.top && y < (e.top+e.height)){
+          dead = true
+          g.transition().attr('r', 30).attr('fill-opacity',0).remove()
+          element.explode()
+        }
+      }
+
+    })
+
   }
 
   function alive(){

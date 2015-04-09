@@ -1,7 +1,7 @@
-module.exports = function(parent){
+module.exports = function(){
 
   var circle_size = 30
-  var x = w * Math.random()
+  var x = (0.1*window.w) + (window.w*0.8*Math.random())
   var y = (h*0.8) + Math.random()*circle_size*2
 
   var r = (Math.random()*(circle_size*0.5)) + (circle_size*0.5)
@@ -10,8 +10,8 @@ module.exports = function(parent){
     .attr('cx', x)
     .attr('cy', y)
     .attr('r', r)
-    .attr('fill', 'white')
-    .attr('fill-opacity', 0.6)
+    .attr('fill', d3.rgb(0,0,0))
+    .attr('fill-opacity', Math.random()*0.1+0.1)
 
   var node = cloud.node()
 
@@ -29,7 +29,8 @@ module.exports = function(parent){
   }
 
   function explode(){
-    r = r - 1
+    r -= 2
+    r = Math.max(r,0)
     _bbox = {
       height: r*2,
       width: r*2,
@@ -45,6 +46,5 @@ module.exports = function(parent){
     bbox: bbox,
     explode: explode
   }
-
 
 }

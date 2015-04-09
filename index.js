@@ -2,22 +2,23 @@ var d3 = require('d3')
 
 var create_alien = require('./alien.js')
 var create_cloud = require('./cloud.js')
-
+var create_service = require('./service.js')
+var create_player = require('./player.js')
 // global game objects
 window.projectiles = []
 window.clouds = []
+window.services = []
 
-window.w = 1024
-window.h = 768
+window.w = window.innerWidth*0.9
+window.h = window.w*(3/4)
 
 window.svg = d3.select('body').append('svg')
-  .attr('width', '100%')
-  .attr('height', 768)
+  .attr('width', window.w)
+  .attr('height', window.h)
   .attr('viewBox', '0 0 1024 768')
-  .attr('preserveAspectRatio', 'xMidYMid')
-  .style('background-color','green')
-
-
+  // .attr('preserveAspectRatio', 'xMinYMin')
+  .style('background-color', d3.rgb(244,244,244))
+  .style('margin-left', window.innerWidth*0.05)
 
 window.rng = d3.random.normal(0,0.5)
 
@@ -52,37 +53,27 @@ for(var i = 0; i < n_aliens; i++){
 }
 
 // ////////////////////////////////////
-// clouds
-var n_clouds = 8
-
-var clouds_w = w * 0.8
-var clouds_h = h * 0.1
-
-var circle_size = w*0.02
-
-var g_clouds_parent = svg.append('g')
-  .attr('transform', 'translate('+(0.5*(w-clouds_w))+' ' +(h*0.8)+')')
-
-var scale_x_clouds = d3.scale.linear().domain([0,n_clouds-1]).range([0,clouds_w])
-
-for(i = 0; i < n_clouds; i++){
-
-  var g_local_clouds = g_clouds_parent.append('g')
-    .attr('transform', 'translate('+(scale_x_clouds(i)) +' '+(0)+')')
-
-  for(var j = 0; j < 16; j++){
-
-    window.clouds.push(create_cloud(g_local_clouds))
-  }
-
+// services
+for(var k = 0; k < 12; k++){
+  window.services.push(create_service())
 }
 
-svg.on('mousemove', function(){
-})
+// ////////////////////////////////////
+// clouds
+for(var j = 0; j < 128; j++){
+  window.clouds.push(create_cloud())
+}
+
+
+
 
 // ////////////////////////////////////
 // player
-var player = {}
+var player = create_player()
+
+
+
+
 
 // ////////////////////////////////////
 // ////////////////////////////////////
@@ -97,9 +88,14 @@ function game_tick(){
 
   })
 
+  if(Math.random()<0.01){
+    window.services.push(create_service())
+  }
+
+
   window.offset_x += shift_x_dir
-  if(window.offset_x > w*0.5){
-    window.offset_x = w*0.5
+  if(window.offset_x > w*0.65){
+    window.offset_x = w*0.65
     shift_x_dir *= -1
 
     window.offset_y += 10
@@ -118,6 +114,11 @@ function game_tick(){
   window.projectiles = window.projectiles.filter(function(e){
     return e.alive();
   })
+
+  window.services = window.services.filter(function(e){
+    return e.alive();
+  })
+
 
   // console.log('projectiles count ' + projectiles.length)
 
