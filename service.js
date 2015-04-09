@@ -24,6 +24,7 @@ module.exports = function(){
     .attr('transform', 'translate('+x+' '+y+')')
     .each('end', function(){
 
+      console.log(node.offsetX)
       var _readonlybbox = node.getBoundingClientRect()
 
       _bbox = {
@@ -33,8 +34,8 @@ module.exports = function(){
         left: _readonlybbox.left
       }
 
-      _bbox.left -= _bbox.width * 0.5
-      _bbox.top += _bbox.height * 0.45
+      // _bbox.left -= _bbox.width * 0.5
+      // _bbox.top += _bbox.height * 0.45
 
     })
 

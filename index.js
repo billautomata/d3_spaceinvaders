@@ -9,16 +9,19 @@ window.projectiles = []
 window.clouds = []
 window.services = []
 
-window.w = window.innerWidth*0.9
-window.h = window.w*(3/4)
+window.w = 1024
+window.h = 768
 
-window.svg = d3.select('body').append('svg')
+window.svg = d3.select('body').append('div').append('svg')
   .attr('width', window.w)
   .attr('height', window.h)
   .attr('viewBox', '0 0 1024 768')
-  // .attr('preserveAspectRatio', 'xMinYMin')
+  .attr('preserveAspectRatio', 'xMidYMid')
   .style('background-color', d3.rgb(244,244,244))
-  .style('margin-left', window.innerWidth*0.05)
+  .style('width', Math.floor(window.w)+'px')
+  .style('height', Math.floor(window.h)+'px')
+  .style('display', 'block')
+  .style('margin', 'auto')
 
 window.rng = d3.random.normal(0,0.5)
 
