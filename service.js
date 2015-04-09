@@ -30,8 +30,8 @@ module.exports = function(){
       _bbox = {
         width: _readonlybbox.width,
         height: _readonlybbox.height,
-        top: _readonlybbox.top,
-        left: _readonlybbox.left
+        top: _readonlybbox.top ,
+        left: _readonlybbox.left - window.offset_left
       }
 
       // _bbox.left -= _bbox.width * 0.5

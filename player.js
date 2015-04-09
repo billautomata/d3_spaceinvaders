@@ -36,7 +36,7 @@ module.exports = function create_player(){
 
     // console.log(d3.event)
     x = d3.event.clientX
-    g_parent.attr('transform', 'translate('+x+' '+y+')')
+    g_parent.attr('transform', 'translate('+(x-window.offset_left)+' '+y+')')
 
 
   })

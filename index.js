@@ -23,6 +23,9 @@ window.svg = d3.select('body').append('div').append('svg')
   .style('display', 'block')
   .style('margin', 'auto')
 
+window.offset_left = document.getElementsByTagName('svg')[0].offsetLeft
+
+
 window.rng = d3.random.normal(0,0.5)
 
 // ////////////////////////////////////
@@ -64,7 +67,7 @@ for(var k = 0; k < 12; k++){
 // ////////////////////////////////////
 // clouds
 for(var j = 0; j < 64; j++){
-  window.clouds.push(create_cloud())
+  // window.clouds.push(create_cloud())
 }
 
 
